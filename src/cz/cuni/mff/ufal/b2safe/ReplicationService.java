@@ -249,9 +249,9 @@ public class ReplicationService {
     	return retList;
     }
         
-    private SettableJargonProperties overrideJargonProperties = null;
+    private static SettableJargonProperties overrideJargonProperties = null;
     
-    public SettableJargonProperties getSettableJargonProperties() {
+    public static SettableJargonProperties getSettableJargonProperties() {
     	IRODSSession irodsSession = irodsFileSystem.getIrodsSession();
     	overrideJargonProperties = new SettableJargonProperties(irodsSession.getJargonProperties());
 		return overrideJargonProperties;
