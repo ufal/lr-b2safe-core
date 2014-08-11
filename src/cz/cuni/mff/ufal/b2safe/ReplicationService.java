@@ -33,7 +33,7 @@ import org.irods.jargon.core.utils.LocalFileUtils;
 
 public class ReplicationService {
 	
-	enum CONFIGURATION {
+	public enum CONFIGURATION {
 		HOST,
 		PORT,
 		USER_NAME,
