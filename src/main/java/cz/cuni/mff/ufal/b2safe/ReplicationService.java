@@ -111,7 +111,7 @@ public class ReplicationService {
     	IRODSFile targetDirectory = irodsFileFactory.instanceIRODSFile(irodsAccount.getHomeDirectory() + remoteDirectory);
     	
     	if(!targetDirectory.exists()) {
-    		targetDirectory.mkdir();
+    		targetDirectory.mkdirs();
     	}
     	    	
     	String targetFile = targetDirectory.getCanonicalPath() + IRODSFile.PATH_SEPARATOR + localFile.getName();
@@ -208,6 +208,16 @@ public class ReplicationService {
     		AvuData data = AvuData.instance(md.getKey(), md.getValue(), "");
     		collectionAO.modifyAvuValueBasedOnGivenAttributeAndUnit(collectionPath, data);
     	}
+    }
+    
+    protected Map<String, String> getMetadataOfDataObject(String dataObjectAbsolutePath) throws JargonException {
+    	Map<String, String> metadata = new HashMap<String, String>();
+    	DataObjectAO dataObjectAO = irodsFileSystem.getIRODSAccessObjectFactory().getDataObjectAO(irodsAccount);    	
+    	List<MetaDataAndDomainData> listMetaData = dataObjectAO.findMetadataValuesForDataObject(dataObjectAbsolutePath);
+    	for (MetaDataAndDomainData lmd : listMetaData) {
+    		metadata.put(lmd.getAvuAttribute(), lmd.getAvuValue());
+    	}     
+    	return metadata;    	
     }
     
     public List<String> list() throws JargonException {
