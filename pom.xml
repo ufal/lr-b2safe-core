@@ -16,10 +16,19 @@
 		<version>${project.version}</version>
 		<packaging>${project.packaging}</packaging>
 		<file>.jar</file>
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -32,25 +41,40 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>lib/jargon-core-4.0.2-SNAPSHOT.jar</file>
+							<file>lib/jargon-core-4.0.2-UFAL.jar</file>
 							<groupId>org.irods</groupId>
 							<artifactId>jargon</artifactId>
 							<packaging>jar</packaging>
-							<version>4.0.2-SNAPSHOT</version>
+							<version>4.0.2-UFAL</version>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
+		<filters>
+			<filter>testing.properties</filter>
+		</filters>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
 	</build>
 
 	<dependencies>
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.irods</groupId>
 			<artifactId>jargon</artifactId>
-			<version>4.0.2-SNAPSHOT</version>
+			<version>4.0.2-UFAL</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/jargon-core-4.0.2-SNAPSHOT.jar</systemPath>			
+			<systemPath>${project.basedir}/lib/jargon-core-4.0.2-UFAL.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>

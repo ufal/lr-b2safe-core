@@ -8,27 +8,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.connection.IRODSServerProperties;
-import org.irods.jargon.core.connection.IRODSSession;
-import org.irods.jargon.core.connection.SettableJargonProperties;
-import org.irods.jargon.core.connection.auth.AuthResponse;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.packinstr.TransferOptions;
-import org.irods.jargon.core.pub.CollectionAO;
-import org.irods.jargon.core.pub.DataObjectAO;
-import org.irods.jargon.core.pub.DataTransferOperations;
-import org.irods.jargon.core.pub.IRODSFileSystem;
-import org.irods.jargon.core.pub.domain.AvuData;
-import org.irods.jargon.core.pub.io.IRODSFile;
-import org.irods.jargon.core.pub.io.IRODSFileFactory;
-import org.irods.jargon.core.query.AVUQueryElement;
-import org.irods.jargon.core.query.AVUQueryElement.AVUQueryPart;
-import org.irods.jargon.core.query.AVUQueryOperatorEnum;
-import org.irods.jargon.core.query.JargonQueryException;
-import org.irods.jargon.core.query.MetaDataAndDomainData;
-import org.irods.jargon.core.transfer.TransferControlBlock;
-import org.irods.jargon.core.utils.LocalFileUtils;
+import _org.irods.jargon.core.connection.IRODSAccount;
+import _org.irods.jargon.core.connection.IRODSServerProperties;
+import _org.irods.jargon.core.connection.IRODSSession;
+import _org.irods.jargon.core.connection.SettableJargonProperties;
+import _org.irods.jargon.core.connection.auth.AuthResponse;
+import _org.irods.jargon.core.exception.JargonException;
+import _org.irods.jargon.core.packinstr.TransferOptions;
+import _org.irods.jargon.core.pub.CollectionAO;
+import _org.irods.jargon.core.pub.DataObjectAO;
+import _org.irods.jargon.core.pub.DataTransferOperations;
+import _org.irods.jargon.core.pub.IRODSFileSystem;
+import _org.irods.jargon.core.pub.domain.AvuData;
+import _org.irods.jargon.core.pub.io.IRODSFile;
+import _org.irods.jargon.core.pub.io.IRODSFileFactory;
+import _org.irods.jargon.core.query.AVUQueryElement;
+import _org.irods.jargon.core.query.AVUQueryElement.AVUQueryPart;
+import _org.irods.jargon.core.query.AVUQueryOperatorEnum;
+import _org.irods.jargon.core.query.JargonQueryException;
+import _org.irods.jargon.core.query.MetaDataAndDomainData;
+import _org.irods.jargon.core.transfer.TransferControlBlock;
+import _org.irods.jargon.core.utils.LocalFileUtils;
 
 
 public class ReplicationService {
@@ -53,8 +53,8 @@ public class ReplicationService {
 		configuration = new Properties();
 		
 		/* copy required configuration */
-		for(CONFIGURATION c : CONFIGURATION.values()) {
-			configuration.put(c.name(), config.get(c.name()));
+		for(CONFIGURATION c : CONFIGURATION.values()) {			
+			configuration.put(c.name(), config.getProperty(c.name(), ""));
 		}
 		
     	String host = configuration.getProperty(CONFIGURATION.HOST.name());
@@ -221,6 +221,7 @@ public class ReplicationService {
     
     public List<String> list(String remoteDirectory, boolean returnAbsPath) throws JargonException {
     	IRODSFileFactory irodsFileFactory = irodsFileSystem .getIRODSFileFactory(irodsAccount);    	
+    	System.out.println(irodsAccount.getHomeDirectory() + remoteDirectory);
     	IRODSFile irodsDirectory = irodsFileFactory.instanceIRODSFile(irodsAccount.getHomeDirectory() + remoteDirectory);    	
     	String[] list = irodsDirectory.list();
     	List<String> retList = new ArrayList<String>();
@@ -263,10 +264,14 @@ public class ReplicationService {
     				.retrieveIRODSServerProperties(irodsAccount.getHost(), irodsAccount.getZone());
     }
     
+    public void close() throws Throwable {
+    	irodsFileSystem.close();
+    }
+    
     @Override
     protected void finalize() throws Throwable {
     	super.finalize();
-    	irodsFileSystem.close();
+    	this.close();
     }
     
 }
