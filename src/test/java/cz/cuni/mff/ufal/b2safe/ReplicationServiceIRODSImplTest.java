@@ -113,7 +113,7 @@ public class ReplicationServiceIRODSImplTest {
 		Map<String, String> metadata = new HashMap<String, String>();
 		metadata.put("TEMP1", "" + Math.random());
 		metadata.put("TEMP2", "" + Math.random());		
-		repServ.replicate(temp.getAbsolutePath(), metadata);
+		repServ.replicate(temp.getAbsolutePath(), metadata, true);
 		List<String> fileList = repServ.search(metadata);
 		Assert.assertFalse(fileList.isEmpty());
 		for(String file : fileList) {
