@@ -118,8 +118,11 @@ public class ReplicationServiceIRODSImplTest {
 		Assert.assertFalse(fileList.isEmpty());
 		for(String file : fileList) {
 			String localFileName = System.getProperty("java.io.tmpdir") + File.pathSeparator + "retrieved.tmp";
-			repServ.retriveFile(file, localFileName);
 			File f = new File(localFileName);
+			if(f.exists()) {
+				f.delete();
+			}
+			repServ.retriveFile(file, localFileName);
 			FileInputStream fis = new FileInputStream(f);
 			String md5 = DigestUtils.md5Hex(fis);
 			fis.close();
