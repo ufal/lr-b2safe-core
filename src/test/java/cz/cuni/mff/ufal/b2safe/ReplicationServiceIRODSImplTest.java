@@ -117,7 +117,7 @@ public class ReplicationServiceIRODSImplTest {
 		List<String> fileList = repServ.search(metadata);
 		Assert.assertFalse(fileList.isEmpty());
 		for(String file : fileList) {
-			String localFileName = System.getProperty("java.io.tmpdir") + File.pathSeparator + "retrieved.tmp";
+			String localFileName = System.getProperty("java.io.tmpdir") + File.separator + "retrieved.tmp";
 			File f = new File(localFileName);
 			if(f.exists()) {
 				f.delete();
