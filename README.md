@@ -7,7 +7,7 @@ The Business to Safe Core is a java based API that provides basic framework for 
 
 * Clone the code in the repository.
 * Run
-`mvn install -Dmaven.test.skip=false`
+`mvn install -Dmaven.test.skip=true`
 
 
 ### Testing
