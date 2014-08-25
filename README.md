@@ -16,6 +16,7 @@ The Business to Safe Core is a java based API that provides basic framework for 
 * Run `mvn test`
 This will test the all basic functionalities replicate, retrieve, list, search, delete.
 
+For verifying the proper working you can use the IRODS command line client "iCommands" https://wiki.irods.org/index.php/icommands
 
 ### How to use
 
