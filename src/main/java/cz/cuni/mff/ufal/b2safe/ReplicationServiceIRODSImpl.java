@@ -523,12 +523,13 @@ public class ReplicationServiceIRODSImpl implements ReplicationSerice {
 				queryElements.add(AVUQueryElement.instanceForValueQuery(
 						AVUQueryPart.ATTRIBUTE, AVUQueryOperatorEnum.EQUAL,
 						md.getKey()));
-				queryElements.add(AVUQueryElement.instanceForValueQuery(
-						AVUQueryPart.VALUE, AVUQueryOperatorEnum.EQUAL,
-						md.getValue()));
+				if(md.getValue()!=null) {
+					queryElements.add(AVUQueryElement.instanceForValueQuery(
+							AVUQueryPart.VALUE, AVUQueryOperatorEnum.EQUAL,
+							md.getValue()));
+				}
 			}
-			List<MetaDataAndDomainData> result = cao
-					.findMetadataValuesByMetadataQuery(queryElements);
+			List<MetaDataAndDomainData> result = cao.findMetadataValuesByMetadataQuery(queryElements);
 			List<String> retList = new ArrayList<String>();
 			for (MetaDataAndDomainData r : result) {
 				retList.add(r.getDomainObjectUniqueName());
