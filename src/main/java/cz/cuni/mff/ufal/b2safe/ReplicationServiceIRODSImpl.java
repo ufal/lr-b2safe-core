@@ -109,8 +109,8 @@ public class ReplicationServiceIRODSImpl implements ReplicationSerice {
 
 			return response.isSuccessful();
 		} catch (NumberFormatException e) {
-			log.error("Invalid value of port: " + port);
-			throw new ReplicationServiceException(e);
+			log.error("Invalid value of port: " + port, e);
+			return false;
 		} catch (JargonException e) {
 			throw new ReplicationServiceException(e);
 		}
