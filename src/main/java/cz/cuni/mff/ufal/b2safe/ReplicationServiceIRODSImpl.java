@@ -48,7 +48,7 @@ import _org.irods.jargon.core.utils.LocalFileUtils;
  * 
  */
 
-public class ReplicationServiceIRODSImpl implements ReplicationSerice {
+public class ReplicationServiceIRODSImpl implements ReplicationService {
 
 	Logger log = Logger.getLogger(ReplicationServiceIRODSImpl.class);
 

@@ -18,7 +18,7 @@ import java.util.Properties;
  * @author Amir Kamran
  * 
  */
-public interface ReplicationSerice {
+public interface ReplicationService {
 
 	/**
 	 * Initialize the ReplicationService with the provided configuration and try
